@@ -1,0 +1,55 @@
+
+<div class="card">
+    <p-dataView #dv [value]="beers" filterBy="name"  [rows]="12" [paginator]="true"  [rowsPerPageOptions]="[12,20,40]"
+    [totalRecords]="totalBeers"  [lazy]="true" (onLazyLoad)="loadData($event)" [showCurrentPageReport] = "true" 
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [loading]="loading">
+        
+        <ng-template pTemplate="header">
+                <div class="flex">
+                <div class="flex flex-auto">
+                    <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="dv.filter($event.target.value)" placeholder="Search...">
+                    </span>
+                </div>
+                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+            </div>
+        </ng-template>
+        <ng-template let-beer pTemplate="listItem">
+            <div class="col-12">
+                <div class="flex flex-row xl:align-items-start p-4 gap-4">
+                    <div class="w-10rem">
+                        <img class="flex m-auto h-10rem border-round" [src]="beer.image_url" [alt]="beer.name" />
+                    </div>
+                    <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+                        <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+                            <div class="text-2xl font-bold text-900">{{ beer.name }}</div>
+                            <span class="text-l font-semibold">{{ beer.first_brewed }}</span>
+                            <span class="text">{{ beer.description }}</span>
+                            <p-button label="En savoir plus" [routerLink]="['/details', beer.id]" ></p-button>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </ng-template>
+        <ng-template let-beer pTemplate="gridItem">
+            <div class="col-3 sm:col-6 lg:col-3 xl:col-3 p-2 px-3">
+                <div class="p-4 border-1 h-full grid surface-border surface-card border-round ">
+                    <div class="m-auto">
+                        <div class="w-full">
+                            <img class="flex m-auto h-10rem border-round" [src]="beer.image_url" [alt]="beer.name" />
+                        </div>
+                        <div class="flex flex-column text-center gap-3">
+                            <div class="text-2xl font-bold text-900">
+                                {{ beer.name }}
+                            </div>
+                                <span class="text-l font-semibold">{{ beer.first_brewed }}</span>
+                                <span class="text-xs">{{ beer.description }}</span>
+                                <p-button label="En savoir plus" [routerLink]="['/details', beer.id]"></p-button>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-dataView>
+</div>

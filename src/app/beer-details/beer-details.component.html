@@ -1,0 +1,16 @@
+
+<p-card  *ngIf="beer">
+    <ng-template pTemplate="header">
+        <h1 class="text-l font-semibold">{{ beer.name}}</h1>
+    </ng-template>
+    <div class="w-10rem">
+        <img class="flex m-auto h-10rem border-round" [src]="beer.image_url" [alt]="beer.name" />
+    </div>
+    <span class="text-l font-semibold">{{ beer.first_brewed }}</span>
+    <p>{{ beer.description }}</p>
+    <p>{{ beer.brewers_tips }}</p>
+    <ng-template pTemplate="footer">
+        <p-button label="Précèdent" icon="pi pi-chevron-left" styleClass="p-button-secondary"  (click)="goBack()"></p-button>
+        <p-button [style]="{ 'margin-left': '.5em' }" label="Suivant" icon="pi pi-chevron-right" (click)="nextBeer()"></p-button>
+    </ng-template>
+</p-card>
